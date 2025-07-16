@@ -1,0 +1,57 @@
+---
+metadata:
+  title: |
+    Legal Aid Society Application
+  short title: |
+    Application
+  description: |
+    Online Intake Interview
+  logo: <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAAUADkDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9MdR8daZp7TqBcXL2+oR6bOsMJzFM8ayLndjIKyJgjOS6qMk4rlv+FtXmpLanRtEk1CRbhDe28JLyWtqRIrlxxieN0y0A3NgYHLA1mfEXVXm1y4GgeEG8QarOILN7nWrw2Wjb0dmhDb8ieRXYkeXG5yANwKjFC18D+JfHGk2b+MPilJp/nxx3H9l+CnisbdATgKs7B5pEz8oYMgYjoK6Y0VbmqSUV97+5frY5ZV9eWnFyf3L73+lzpdW1HxjrnhPw1daZbtY61Ekd9qNrIBbiaSNFMlmA+f8AWM7ANnaNmd3TMXhLUPFq+IrS01rVITJ5i+fayyWvzQi1wSixjzPMM/zHPyhd3sBwsP7HfwfuL5dR1R9R8Q3Fwf3c+p+IJ5C24qvyssik5LqOpzvA7irFv+yt8DbXUjNplimlasqEi503xDdQ3CLtBzlZ84xg89sVtyYRf8vJf+Ar/wCSMfaYx/8ALuP/AIE//kTqdP1Dx5o7TwHT5LhnmeS3mvMzNdDMG1ZAkhS2IV5VypKExeYFGTGbsfxclhTRzcaRLcXGpwLL9hs8m5tZGkjX7PIjAZdVMzMSVx9ncEDrRY+BNO0CwiTT/iD4gsrd4fOSS41eO83RY++GuUk+XHO4evWnrZ6hpKnf4y0rxDY2/wC+8nxBBEJVwCQfPiKqmAfvGJjj865nCH2Zfn/X4nUqk/tQ/L+vwOu0rxZpusXU9rDOUuoZJYmhmUoWMbKrlCeHCs6AlSQCwBweK2K4vSdD0fUrnTtVurO1iudNN0qw20y3NrHLLKksku/aDv3xghmCkFm4712lZNWNU7mXrXh2z8QeT9rV2WMMpVG2h0YYZG9VOBn6D3zkXnwz0O+WwV4po1sYI4LdYZTHtEZyhO3G4qeRuyBzgDc+4opDKt18H/DN1p2n2LWsyW2nySTWix3Dr5DsMbl5428FR0QohUDauJLf4UeH7NYxbQzQ+WXaNvOMhRmkEm4F84IdVI+mPu5BKKALl18P9JukCFZ0QRrFtSY4ICyqcj1ZZ5VJ/wBrPBCkU5vhP4cuCGktpTIolVZFmZWVJIzGycYyu0gbTkZRGOWUGiigDptP0y30tZ1to/LE0z3Dgd3Y5Y/iat0UUAf/2Q==">
+  authors:
+    - name: Alexander Clark
+      organization: Metatheria, LLC
+  revision_date: 2021-06-15
+---
+modules:
+  - .smc_pika_encode
+  - .people_object_to_dict
+  - .income_functions
+---
+features:
+  javascript: 
+  - fix_currency_wrapper.js
+  - date_replace.js
+  navigation: True
+  progress bar: True
+---
+include:
+  - code.yml
+  - process_for_pika.yml
+  - en.yml
+  - es.yml
+---
+language: en
+sections:
+  - Getting Started
+  - Name And Contact Info
+  - Opposing Parties
+  - Demographics
+  - Financial
+  - Housing Cases
+  - How Heard
+  - Signature
+  - Documents
+  - Submit
+---
+language: es
+sections: 
+  - Inicio
+  - Nombre e información de contacto
+  - Contra Partes
+  - Demografía
+  - Financiero
+  - Casos de vivienda
+  - ¿Cómo escuchó?
+  - Firma
+  - Documentos
+  - Presentar

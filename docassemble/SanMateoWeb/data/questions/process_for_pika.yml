@@ -1,0 +1,517 @@
+mandatory: true
+code: | 
+  if not defined('first_name'):
+    first_name = ""
+  if not defined('middle_initial'):
+    middle_initial = ""
+  if not defined('last_name'):
+    last_name = ""
+  if not defined('suffix'):
+    suffix = ""
+  if not defined('aliases'):
+    aliases = ""
+  if not defined('birth_date'):
+    birth_date = ""
+  if not defined('coverage'):
+    coverage = ""
+  if not defined('email'):
+    email = ""
+  if not defined('mailing_address'):
+    mailing_address = ""
+  if not defined('apt_number'):
+    apt_number = ""
+  if not defined('city'):
+    city = ""
+  if not defined('state'):
+    state = ""
+  if not defined('zipcode'):
+    zipcode = ""
+  if not defined('main_phone'):
+    main_phone = ""
+  if not defined('sms_ok_main'):
+    sms_ok_main = ""
+  if not defined('alt_phone'):
+    alt_phone = ""
+  if not defined('sms_ok_alt'):
+    sms_ok_alt = ""
+  if not defined('oppo_person'):
+    oppo_person = ""
+  if not defined('oppo_is_natural_person'):
+    oppo_is_natural_person = ""
+  if not defined('oppo_name'):
+    oppo_name = ""
+  if not defined('oppo_first_name'):
+    oppo_first_name = ""
+  if not defined('oppo_last_name'):
+    oppo_last_name = ""
+  if not defined('oppo_suffix'):
+    oppo_suffix = ""
+  if not defined('oppo_dob'):
+    oppo_dob = ""
+  if not defined('oppo_address'):
+    oppo_address = ""
+  if not defined('oppo_city'):
+    oppo_city = ""
+  if not defined('oppo_state'):
+    oppo_state = ""
+  if not defined('oppo_zip'):
+    oppo_zip = ""
+  if not defined('oppo_phone'):
+    oppo_phone = ""
+  if not defined('oppo_aliases'):
+    oppo_aliases = ""
+  if not defined('language'):
+    language = ""
+  if not defined('interpreter'):
+    interpreter = ""
+  if not defined('marital'):
+    marital = ""
+  if not defined('hispanic'):
+    hispanic = ""
+  if not defined('ethnicity'):
+    ethnicity = ""
+  if not defined("ethnic_description"):
+    ethnic_description = ""
+  if not defined('has_disability'):
+    has_disability = ""
+  if not defined('veteran'):
+    veteran = ""
+  if not defined('dv_victim'):
+    dv_victim = ""
+  if not defined('has_land'):
+    has_land = ""
+  if not defined('land_not_lived_on'):
+    land_not_lived_on = ""
+  if not defined('realprop_val'):
+    realprop_val = ""
+  if not defined('has_other_assets'):
+    has_other_assets = ""
+  if not defined('other_assets_val'):
+    other_assets_val = ""
+  if not defined('rent'):
+    rent = ""
+  if not defined('mortgage'):
+    mortgage = ""
+  if not defined('childcare'):
+    childcare = ""
+  if not defined('medical_expenses'):
+    medical_expenses = ""
+  if not defined('addl_hshld_members'):
+    addl_hshld_members = ""
+  
+  if not defined('employment'):
+    employment = ""
+  if not defined('second_employment'):
+    second_employment = ""
+  if not defined('third_employment'):
+    third_employment = ""
+  if not defined('cw'):
+    cw = ""
+  if not defined('ga'):
+    ga = ""
+  if not defined('ss'):
+    ss = ""
+  if not defined('ssi'):
+    ssi = ""
+  if not defined('sdi'):
+    sdi = ""
+  if not defined('wc'):
+    wc = ""
+  if not defined('cs'):
+    cs = ""
+  if not defined('capi'):
+    capi = ""
+  if not defined('private_disability'):
+    private_disability = ""
+  if not defined('pension'):
+    pension = ""
+  if not defined('vet_ben'):
+    vet_ben = ""
+  if not defined('other_income'):
+    other_income = ""
+  if not defined('employment_multi'):
+    employment_multi = ""
+  if not defined('employment_multi_who'):
+    employment_multi_who = ""
+  if not defined('second_employment_multi'):
+    second_employment_multi = ""
+  if not defined('second_employment_multi_who'):
+    second_employment_multi_who = ""
+  if not defined('third_employment_multi'):
+    third_employment_multi = ""
+  if not defined('third_employment_multi_who'):
+    third_employment_multi_who = ""
+  if not defined('cw_multi'):
+    cw_multi = ""
+  if not defined('cw_multi_who'):
+    cw_multi_who = ""
+  if not defined('ga_multi'):
+    ga_multi = ""
+  if not defined('ga_multi_who'):
+    ga_multi_who = ""
+  if not defined('ss_multi'):
+    ss_multi = ""
+  if not defined('ss_multi_who'):
+    ss_multi_who = ""
+  if not defined('second_ss_multi'):
+    second_ss_multi = ""
+  if not defined('second_ss_multi_who'):
+    second_ss_multi_who = ""
+  if not defined('ssi_multi'):
+    ssi_multi = ""
+  if not defined('ssi_multi_who'):
+    ssi_multi_who = ""
+  if not defined('second_ssi_multi'):
+    second_ssi_multi = ""
+  if not defined('second_ssi_multi_who'):
+    second_ssi_multi_who = ""
+  if not defined('sdi_multi'):
+    sdi_multi = ""
+  if not defined('sdi_multi_who'):
+    sdi_multi_who = ""
+  if not defined('wc_multi'):
+    wc_multi = ""
+  if not defined('wc_multi_who'):
+    wc_multi_who = ""
+  if not defined('cs_multi'):
+    cs_multi = ""
+  if not defined('cs_multi_who'):
+    cs_multi_who = ""
+  if not defined('capi_multi'):
+    capi_multi = ""
+  if not defined('capi_multi_who'):
+    capi_multi_who = ""
+  if not defined('private_disability_multi'):
+    private_disability_multi = ""
+  if not defined('private_disability_multi_who'):
+    private_disability_multi_who = ""
+  if not defined('pension_multi'):
+    pension_multi = ""
+  if not defined('pension_multi_who'):
+    pension_multi_who = ""
+  if not defined('vet_ben_multi'):
+    vet_ben_multi = ""
+  if not defined('vet_ben_multi_who'):
+    vet_ben_multi_who = ""
+  if not defined('other_income_multi'):
+    other_income_multi = ""
+  if not defined('other_income_multi_who'):
+    other_income_multi_who = ""
+  if not defined('how_heard'):
+    how_heard = ""
+  if not defined('referral_med'):
+    referral_med = ""
+  if not defined('referral_org'):
+    referral_org = ""
+  if not defined('referral_legal_aid'):
+    referral_legal_aid = ""
+  if not defined('referral_other'):
+    referral_other = ""
+  if not defined('referral_other_other'):
+    referral_other_other = ""
+  if not defined('sex'):
+    sex = ""
+  if not defined('gender_identity'):
+    gender_identity = ""
+  if not defined('c4a_gender_notes'):
+    c4a_gender_notes = ""
+  if not defined('sexual_orientation'):
+    sexual_orientation = ""
+  if not defined('c4a_identity_notes'):
+    c4a_identity_notes = ""
+  if not defined('housing_case'):
+    housing_case = ""
+  if not defined('b64_contents'):
+    b64_contents = ""
+  if not defined('uploadedfilename'):
+    uploadedfilename = ""
+  
+  referred_by_code = referral_med + referral_org + referral_legal_aid + referral_other
+  referred_by_code = referred_by_code[:2]
+  
+  income_assets_narrative = ""
+  if addl_hshld_members is False:
+    income_assets_narrative += "Applicant reported the following monthly income information: $"
+    income_assets_narrative += str(int(employment or 0)) + " from employment, $" 
+    income_assets_narrative += str(int(second_employment or 0)) + " from a second employment source, $" 
+    income_assets_narrative += str(int(third_employment or 0)) + " from a third employment source, $" 
+    income_assets_narrative += str(int(cw or 0)) + " from CalWorks or Cal-Learn, $" 
+    income_assets_narrative += str(int(ga or 0)) + " from General Assistantce, $" 
+    income_assets_narrative += str(int(ss or 0)) + " from social security, $"
+    income_assets_narrative += str(int(ssi or 0)) +  " from SSI, $"
+    income_assets_narrative += str(int(sdi or 0)) +  " from state disability insurance, $"
+    income_assets_narrative += str(int(wc or 0)) + " from workers compensation, $"
+    income_assets_narrative += str(int(cs or 0)) + " from child support, $"
+    income_assets_narrative += str(int(capi or 0)) + " from CAPI, $"
+    income_assets_narrative += str(int(private_disability or 0)) + " from private disability insurance, $"
+    income_assets_narrative += str(int(pension or 0)) +  " from a pension, $"
+    income_assets_narrative += str(int(vet_ben or 0)) +  " from veterans benefits, and $"
+    income_assets_narrative += str(int(other_income or 0)) + " from other income. "
+    total_income = int(employment or 0) + int(second_employment or 0) + int(third_employment or 0) + int(cw or 0) + int(ga or 0) + int(ss or 0) + int(ssi or 0) + int(sdi or 0) + int(wc or 0) + int(cs or 0) + int(capi or 0) + int(private_disability or 0) + int(pension or 0) + int(vet_ben or 0) + int(other_income or 0)
+    
+    income_assets_narrative += "The total monthly income was $" + str(total_income) + ". "
+  if addl_hshld_members is True:
+    income_assets_narrative += "Applicant reported the following monthly income information: "
+    income_assets_narrative += "$" + str(int(employment_multi or 0)) + " from employment received by " + employment_multi_who + ", " 
+    income_assets_narrative += "$" + str(int(second_employment_multi or 0)) + " from employment received by " + second_employment_multi_who + ", " 
+    income_assets_narrative += "$" + str(int(third_employment_multi or 0)) + " from employment received by " + third_employment_multi_who + ", " 
+    income_assets_narrative += "$" + str(int(cw_multi or 0)) + " from CalWorks or Cal-Learn received by " + cw_multi_who + ", " 
+    income_assets_narrative += "$" + str(int(ga_multi or 0)) + " from general Assistance received by " + ga_multi_who + ", " 
+    income_assets_narrative += "$" + str(int(ss_multi or 0)) + " from social security received by " + ss_multi_who + ", " 
+    income_assets_narrative += "$" + str(int(second_ss_multi or 0)) + " from social security received by " + second_ss_multi_who + ", " 
+    income_assets_narrative += "$" + str(int(ssi_multi or 0)) + " from SSI received by " + ssi_multi_who + ", " 
+    income_assets_narrative += "$" + str(int(second_ssi_multi or 0)) + " from SSI received by " + second_ssi_multi_who + ", " 
+    income_assets_narrative += "$" + str(int(sdi_multi or 0)) + " from state disability insurance received by " + sdi_multi_who + ", " 
+    income_assets_narrative += "$" + str(int(wc_multi or 0)) + " from workers compensation received by " + wc_multi_who+ ", " 
+    income_assets_narrative += "$" + str(int(cs_multi or 0)) + " from child or spousal support received by " + cs_multi_who + ", " 
+    income_assets_narrative += "$" + str(int(capi_multi or 0)) + " from CAPI received by " + capi_multi_who + ", " 
+    income_assets_narrative += "$" + str(int(private_disability_multi or 0)) + " from private disability insurance received by " + private_disability_multi_who + ", " 
+    income_assets_narrative += "$" + str(int(pension_multi or 0)) + " from a pension received by " + pension_multi_who + ", " 
+    income_assets_narrative += "$" + str(int(vet_ben_multi or 0)) + " from veterans benefits received by " + vet_ben_multi_who + ", and " 
+    income_assets_narrative += "$" + str(int(other_income_multi or 0)) + " from other sources received by " + other_income_multi_who + "." 
+    total_income = int(employment_multi or 0) + int(second_employment_multi or 0) + int(third_employment_multi or 0) + int(cw_multi or 0) + int(ga_multi or 0) + int(ss_multi or 0) + int(second_ss_multi or 0) + int(ssi_multi or 0) + int(second_ssi_multi or 0) + int(sdi_multi or 0) + int(wc_multi or 0) + int(cs_multi or 0) + int(capi_multi or 0) + int(private_disability_multi or 0) + int(pension_multi or 0) + int(vet_ben_multi or 0) + int(other_income_multi or 0)
+    income_assets_narrative += "The total monthly income was $" + str(int(total_income or 0)) + ". "
+    
+    
+  income_details = [('112', int(employment or 0) + int(second_employment or 0) + int(third_employment or 0) + int(employment_multi or 0) + int(second_employment_multi or 0) + int(third_employment_multi or 0)), 
+                  ('123', int(cw or 0) + int(cw_multi or 0)), 
+				          ('128', int(ga or 0) + int(ga_multi or 0)), 
+				          ('113', int(ss or 0) + int(ss_multi or 0) + int(second_ss_multi or 0)), 
+				          ('116', int(ssi or 0) + int(ssi_multi or 0) + int(second_ssi_multi or 0)), 
+				          ('130', int(sdi or 0) + int(sdi_multi or 0)), 
+				          ('132', int(wc or 0) + int(wc_multi or 0)), 
+				          ('120', int(cs or 0) + int(cs_multi or 0)), 
+				          ('129', int(capi or 0) + int(capi_multi or 0)), 
+				          ('121', int(private_disability or 0) + int(private_disability_multi or 0)), 
+				          ('141', int(pension or 0) + int(pension_multi or 0)), 
+				          ('135', int(vet_ben or 0) + int(vet_ben_multi or 0)), 
+				          ('121', int(other_income or 0) + int(other_income_multi or 0))]  
+  Sort_Tuple(income_details)
+  
+  # Start Expenses and Assets Processing
+  income_assets_narrative += " The applicant also indicated their household had the following assets: "
+  income_assets_narrative += "real property worth $" + str(int(realprop_val or 0))
+  income_assets_narrative += " and other property worth $" + str(int(other_assets_val or 0)) + ". "
+  total_assets = int(realprop_val or 0) + int(other_assets_val or 0)
+  income_assets_narrative += " The applicant also indicated their household had the following monthly expenses: "
+  income_assets_narrative += "Rent of $" + str(int(rent or 0))
+  income_assets_narrative += ", mortgage of $" + str(int(mortgage or 0))
+  income_assets_narrative += ", childcare expenses of $" + str(int(childcare or 0))
+  income_assets_narrative += ", and medical expenses of $" + str(int(medical_expenses or 0)) + ". "
+  total_expenses = int(rent or 0) + int(mortgage or 0) + int(childcare or 0) + int(medical_expenses or 0)
+  income_assets_narrative += "The total monthly expenses indicated was " + str(int(total_expenses or 0)) + ". "
+  
+  interpreter_narrative = ""
+  if interpreter == True:
+    interpreter_narrative = "Needs an Interpreter."
+  aliases_narrative = ""
+  if len(aliases) > 0:
+    alisases_narrative = "Aliases: " + aliases
+  ethnic_narrative = ""
+  if len(ethnic_description) > 0:
+    ethnic_narrative = " " + first_name + " describes their ethnicity as: " + ethnic_description
+  
+  
+  adults = 0
+  children = 0
+  kids_under_six = 0
+  household_members_narrative = ""
+  if addl_hshld_members is False:
+    household_members_narrative += "Applicant is the only member of their household. "
+    today = datetime.now()
+    time_difference = today.date() - birth_date.date()
+    age = time_difference.days / 365.25
+    if age >= 18:
+      adults = 1
+      children = 0
+    if age < 18:
+      adults = 0
+      children = 1
+      if age < 6:
+        kids_under_six = 1
+    household_members_narrative += "Applicant is " + str(int(age or 0)) + " years old."
+  
+  if addl_hshld_members is True:
+    household_members_narrative += "Applicant is "
+    today = datetime.now()
+    time_difference = today.date() - birth_date.date()
+    age = time_difference.days / 365.25
+    if age >= 18:
+      adults = 1
+      children = 0
+    if age < 18:
+      adults = 0
+      children = 1
+      if age < 6:
+        kids_under_six = 1
+    household_members_narrative += str(int(age or 0)) + " years old. Applicant has other members of their household. "
+    for person in people:
+      household_members_narrative += person.name.first + " " + person.name.last + " " + person.name.suffix
+      household_members_narrative += " was born on " + person.name.birthdate.date().isoformat()
+      household_members_narrative += " and their health insurance type is " + reversed_menu_health_insurance_en.get(person.insurance) + "."
+      household_members_narrative += "Their relationship to the applicant is " + reversed_menu_relation_type_en.get(person.relationship)
+      household_members_narrative += " and they are "
+      if person.disability is False:
+        household_members_narrative += "not "
+      household_members_narrative += "disabled. "
+      today = datetime.now()
+      time_difference = today.date() - person.name.birthdate.date()
+      age = time_difference.days / 365.25
+      if age >= 18:
+        adults = adults + 1
+      if age < 18:
+        children = children + 1
+        if age < 6:
+          kids_under_six = kids_under_six + 1
+      household_members_narrative += person.name.first + " " + person.name.last + " is " + str(int(age)) + " years old. "
+
+    
+    
+  
+  casedata = {
+      "client": {
+      "first_name": first_name,
+      "middle_name": middle_initial,
+      "last_name": last_name,
+      "suffix": suffix,
+      "birth_date": "" if isinstance(birth_date, str) else birth_date.isoformat(),
+      "coverage": coverage,
+      "address": mailing_address,
+      "address2": apt_number,
+      "city": city,
+      "state": state,
+      "zip": zipcode,
+      "email": email,
+      "area_code": main_phone[1:4] if len(main_phone) > 0 else "",
+      "phone": main_phone[-8:] if len(main_phone) > 0 else "",
+      # san mateo does not have an SMS_ok_main field. need to add
+      "sms_ok_main": sms_ok_main,
+      "area_code_alt": alt_phone[1:4] if len(alt_phone) > 0 else "",
+      "phone_alt": alt_phone[-8:] if len(alt_phone) > 0 else "",
+      # san mateo does not have an sms_ok_alt field. need to add
+      "sms_ok_alt": sms_ok_alt,
+      "c4a_sex_at_birth": "D" if sex == "" else sex,
+      "gender": "D" if gender_identity == "" else gender_identity,
+      "c4a_gender_notes": c4a_gender_notes,
+      "c4a_identity": "D" if sexual_orientation == "" else sexual_orientation,
+      "c4a_identity_notes": c4a_identity_notes,
+      "hispanic": hispanic,
+      "ethnicity": ethnicity,
+      "language": language,
+      "marital": marital,
+      "disabled": "1" if has_disability == True else "0",
+      "needs_interpreter": "1" if interpreter == True else "0",
+      "notes": aliases_narrative + " " + interpreter_narrative + ethnic_narrative
+      },
+      "case":{
+      "office":"M",
+      "intake_type": "O",
+      "open_date": str(datetime.now()),
+      "referred_by": referred_by_code,
+      # need code for number of adults, number of children, number of children under 6
+      "adults": adults,
+      "children": children,
+      "persons_helped": adults + children,
+      "issues": ("40110, " if kids_under_six > 0 else "") + ("40111, " if has_disability == True else "") + ("40119" if veteran == True else ""),
+      "income": total_income * 12,
+      "annual0": income_details[0][1] * 12,
+      "income_type0": income_details[0][0],
+      "annual1": income_details[1][1] * 12,
+      "income_type1": income_details[1][0],
+      "annual2": income_details[2][1] * 12,
+      "income_type2": income_details[2][0],
+      "annual3": income_details[3][1] * 12,
+      "income_type3": income_details[3][0],
+      "annual4": income_details[4][1] * 12 if (total_income == income_details[0][1] + income_details[1][1] + income_details[2][1] + income_details[3][1]) else ((total_income - income_details[0][1] - income_details[1][1] - income_details[2][1] - income_details[3][1]) * 12),
+      "income_type4": income_details[4][0] if (total_income == income_details[0][1] + income_details[1][1] + income_details[2][1] + income_details[3][1]) else 121,
+      "assets": total_assets,
+      "asset0": int(realprop_val or 0),
+      "asset_type0": 2,
+      "asset1": int(other_assets_val or 0),
+      "asset_type1": 9,
+      #"asset2": ,
+      #"asset_type2": ,
+      #"asset3": ,
+      #"asset_type3": ,
+      #"asset4": ,
+      #"asset_type4": ,
+      "dom_viol": "1" if dv_victim == True else "0",
+      "veteran_household": "1" if veteran == True else "0",
+      "expense_rent": rent
+      },
+      "op": {
+      "first_name": oppo_first_name,
+      "last_name": oppo_name + oppo_last_name,
+      "suffix": oppo_suffix,
+      "birth_date": "" if isinstance(oppo_dob, str) else oppo_dob.isoformat(),
+      "address": oppo_address,
+      "city": oppo_city,
+      "state": oppo_state,
+      "zip": oppo_zip,
+      "area_code": oppo_phone[1:4] if len(oppo_phone) > 0 else "",
+      "phone": oppo_phone[-8:] if len(oppo_phone) > 0 else "",
+      "notes": "Aliases: " + oppo_aliases
+      },
+      "notes": {
+      "notes0": income_assets_narrative,
+      "notes1": "Client provided this information about their referral: " + referral_other_other if referral_other_other != "" else "",
+      "notes2": household_members_narrative
+      },
+      "files": {
+      "files0": {
+        "data": b64_contents,
+        "filename": uploadedfilename
+         }
+      }
+      }
+      
+  if oppo_person == False:
+    del(casedata["op"])
+    
+  
+  if defined('b64_self_cert_doc'):
+    casedata['files']['files1'] = {}
+    casedata['files']['files1']['data'] = b64_self_cert_doc
+    casedata['files']['files1']['filename'] = "self_certification.pdf"
+  if defined('b64_retainer_doc'):
+    casedata['files']['files2'] = {}
+    casedata['files']['files2']['data'] = b64_retainer_doc
+    casedata['files']['files2']['filename'] = "retainer.pdf"
+  if defined('b64_self_cert_ada_doc'):
+    casedata['files']['files3'] = {}
+    casedata['files']['files3']['data'] = b64_self_cert_ada_doc
+    casedata['files']['files3']['filename'] = "self_certification_ada.pdf"
+  if defined('b64_retainer_ada_doc'):
+    casedata['files']['files4'] = {}
+    casedata['files']['files4']['data'] = b64_retainer_ada_doc
+    casedata['files']['files4']['filename'] = "retainer_ada.pdf"
+  if defined('b64_verification_doc'):
+    casedata['files']['files5'] = {}
+    casedata['files']['files5']['data'] = b64_verification_doc
+    casedata['files']['files5']['filename'] = "info_verification.pdf"
+  if defined('b64_ada_verification_doc'):
+    casedata['files']['files6'] = {}
+    casedata['files']['files6']['data'] = b64_ada_verification_doc
+    casedata['files']['files6']['filename'] = "info_verification_ada.pdf"
+    
+
+    
+  if casedata["files"]["files0"]["data"] == "":
+    del(casedata["files"]["files0"])
+  
+    
+  if addl_hshld_members == True:
+    casedata['hshld'] = {}
+    membercount = adults + children - 1
+    for person in people:
+      casedata['hshld']['member' + str(membercount)] = {}
+      casedata['hshld']['member' + str(membercount)]['first_name'] = person.name.first
+      casedata['hshld']['member' + str(membercount)]['last_name'] = person.name.last
+      casedata['hshld']['member' + str(membercount)]['suffix'] = person.name.suffix
+      casedata['hshld']['member' + str(membercount)]['birth_date'] = person.name.birthdate.date().isoformat()
+      casedata['hshld']['member' + str(membercount)]['relationship'] = person.relationship
+      casedata['hshld']['member' + str(membercount)]['coverage'] = person.insurance
+      casedata['hshld']['member' + str(membercount)]['disabled'] = 1 if person.disability == True else 0
+      membercount = membercount - 1
+
+  process_for_pika = True

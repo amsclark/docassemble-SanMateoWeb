@@ -1,0 +1,797 @@
+default language: en
+---
+question: |
+  Application Information
+subquestion: |
+    <p>Legal Aid Society of San Mateo County is a private, non-profit law firm that provides free legal services to eligible individuals and families. This screening application is our way to collect the information we need to complete the following three steps: </p>
+    
+    <p style="margin-left: 20px"><strong>1. We must first check to be sure we do not have a <span style="text-decoration: underline">conflict of interest</span> due to our prior or current representation of someone connected with your case.</strong> To do this we need the correct spelling of both your name and the adverse party’s name.</p>
+
+    <p>If a conflict of interest exists, LASSMC will not be able to assist you. We will inform you as soon as possible that we cannot provide any legal advice or representation. </p>
+    
+    <p style="margin-left: 20px"><strong>2. We then must check to be sure that you are <span style="text-decoration: underline">financially eligible</span> for our services.</strong></p>
+    
+    <p>A preliminary determination about your financial eligibility for our services is made according to income and asset information on the application, subject to a more thorough evaluation later. </p>
+    
+    <p style="margin-left: 20px"><strong>3. Finally, we must screen your case to see if your situation meets the <span style="text-decoration:underline">priorities of our office.</span></strong></p>
+    
+    <p>LASSMC has limited resources, and so we must prioritize which cases we take. Priorities are established and approved by our governing board. A copy of our priorities is available upon request. </p>
+    
+    <p class="text-center" style="border: 1px solid black; padding:20px"><strong>PLEASE NOTE AT THIS TIME OUR OFFICE IS NOT REPRESENTING YOU AND THE INFORMATION YOU PROVIDE IN THIS APPLICATION SHOULD NOT BE CONSIDERED PRIVILEGED AND IN NO WAY CREATES AN ATTORNEY CLIENT RELATIONSHIP BETWEEN YOU AND LEGAL AID SOCIETY OF SAN MATEO COUNTY</strong></p>
+    
+    <p>We will make every attempt to let you know whether we can accept your case within <strong>two weeks</strong> of receiving your application. Please let us know if you have an emergency situation, and we will try to address your application on an expedited basis. </p>
+continue button field: user_saw_intro
+section: Getting Started
+---
+question: |
+  What is your name?
+fields:
+  - First Name: first_name
+    hint: John
+  - Middle Initial: middle_initial
+    hint: J
+    required: false
+  - Last Name or Last Names (if you have two): last_name
+    hint: Doe
+  - Suffix: suffix
+    hint: Jr.
+    required: false
+  - Other names by which you have been known, including maiden name: aliases
+    hint: Johnny J. Doe
+    required: false
+  - Date of Birth: birth_date
+    hint: mm/dd/yyyy
+    datatype: date
+  - Health Insurance Coverage Type: coverage
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_health_insurance_en.items()}
+progress: 5
+section: Name And Contact Info
+script: | 
+  <script>
+    document.querySelector("#YmlydGhfZGF0ZQ").type = "text"
+  </script>
+---
+question: |
+  Email Address
+subquestion: |
+  Please provide an email address.
+fields: 
+  - Email: email
+    datatype: email
+    required: false
+section: Name And Contact Info
+---
+question: |
+  Mailing address
+subquestion: |
+  If you are homeless, please enter some address where you can receive mail, such as a shelter address or a friend's address.
+fields:
+  - address: mailing_address
+  - apartment number: apt_number
+    required: false
+  - city: city
+  - state: state
+    input type: dropdown
+    code: |
+      {value:key for key, value in us_state_abbrev.items()}
+    default: California
+  - zip: zipcode
+    datatype: integer
+    minlength: 5
+    maxlength: 5
+section: Name And Contact Info
+---
+question: |
+  Home Phone
+fields:
+  - Main Phone Number: main_phone
+    required: false
+  - It is okay to text me at my main phone number: sms_ok_main
+    datatype: yesnowide
+  - Alternate Phone Number: alt_phone
+    required: false
+  - It is okay to text me at my alternate phone: sms_ok_alt
+    datatype: yesnowide
+validation code: |
+  if len(main_phone) > 0:
+    main_phone = phone_number_formatted(main_phone)
+    if phone_number_is_valid(main_phone) != True:
+      validation_error("Please enter a valid 10-digit main phone number, including area code.")
+  if len(alt_phone) > 0:
+    alt_phone = phone_number_formatted(alt_phone)
+    if phone_number_is_valid(alt_phone) != True:
+      validation_error("Alternate phone number is invalid. Please ensure that you have entered a 10-digit number, including area code")
+  if len(main_phone) == 0 and len(alt_phone) == 0:
+    validation_error("You must enter at least one phone number")
+section: Name And Contact Info
+---
+question: |
+  Does your legal issue involve an opposing party (for example, a landlord, a debt collector, or an ex-boyfriend)?
+yesno: oppo_person
+section: Opposing Parties
+---
+question: |
+  Is the opposing party a person, or a business?
+field: oppo_is_natural_person
+buttons:
+  - "A person": True
+  - "A Business": False
+  - "I don't know": False
+section: Opposing Parties
+---
+question: |
+  What is the opposing party’s name (if you know)?
+fields:
+  - name: oppo_name
+    required: false
+section: Opposing Parties
+---
+question: |
+  What is the opposing party's name (if you know)?
+fields:
+  - First Name: oppo_first_name
+    hint: John
+    required: false
+  - Middle Initial: oppo_middle_initial
+    hint: J
+    required: false
+  - Last Name: oppo_last_name
+    hint: Doe
+    required: false
+  - Suffix: oppo_suffix
+    hint: Jr.
+    required: false
+section: Opposing Parties
+---
+question: |
+  What is the opposing party’s date of birth? (if you know)
+fields:
+  - dob: oppo_dob
+    hint: mm/dd/yyyy
+    datatype: date
+    required: false
+section: Opposing Parties
+script: | 
+  <script>
+    document.querySelector("#b3Bwb19kb2I").type = "text"
+    document.getElementById('b3Bwb19kb2I').value = '';
+  </script>
+---
+question: |
+  What is the opposing party’s address? (if you know)
+fields:
+  - address: oppo_address
+    required: false
+  - city: oppo_city
+    required: false
+  - state: oppo_state
+    required: false
+    input type: dropdown
+    code: |
+      {value:key for key, value in us_state_abbrev.items()}
+  - zip: oppo_zip
+    required: false
+    datatype: integer
+    minlength: 5
+    maxlength: 5
+section: Opposing Parties
+---
+question: |
+  What is the opposing party’s phone number? (if you know)
+fields:
+  - phone: oppo_phone
+    required: false
+validation code: |
+  if len(oppo_phone) > 0:
+    oppo_phone = phone_number_formatted(oppo_phone)
+    if phone_number_is_valid(oppo_phone) != True:
+      validation_error("This phone number is invalid. Please ensure that you have entered a 10-digit number, including area code")
+section: Opposing Parties
+---
+question: |
+  Does the opposing party go by any other names? (if you know)
+fields:
+  - other names: oppo_aliases
+    required: false
+section: Opposing Parties
+---
+question: |
+  What is your primary language?
+fields:
+  - language: language
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_language_en.items()}
+  - Would you like to have an interpreter?: interpreter
+    datatype: yesnoradio
+    js show if: |
+      val("language") != "4" && val("language") != ""
+script: |
+  <script>
+    // this rearranges the dropdown list. It's based on numerical indexes so if the language optiosn change you'll need to change the indexes
+    select = document.querySelector("#bGFuZ3VhZ2U")
+    english = document.querySelector("#bGFuZ3VhZ2U > option:nth-child(4)")
+    document.querySelector("#bGFuZ3VhZ2U > option:nth-child(4)").remove()
+    spanish = document.querySelector("#bGFuZ3VhZ2U > option:nth-child(13)")
+    document.querySelector("#bGFuZ3VhZ2U > option:nth-child(13)").remove
+    select.add(english, 1);
+    select.add(spanish, 2);
+  </script>
+section: Demographics
+---
+question: |
+  Marital Status:
+fields:
+  - marital status: marital
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_marital_en.items()}
+section: Demographics
+---
+question: |
+  Ethnicity
+fields:
+  - Hispanic: hispanic
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_hispanic_en.items()}
+  - Ethnicity: ethnicity
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_ethnicity_en.items()}
+  - Specify in your own words: ethnic_description
+    required: false
+    show if:
+      variable: ethnicity
+      is: "57"
+section: Demographics
+---
+question: |
+  Demographics
+subquestion: |
+  Check all that apply.
+fields: 
+  - I have a mental, physical, or other disability.: has_disability
+    datatype: yesnowide
+  - I have served in the military, including the Reserves or National Guard.: veteran
+    datatype: yesnowide
+  - I or someone who lives with me has at some point in time been threatened or hurt by a family member or partner.: dv_victim
+    datatype: yesnowide
+section: Demographics
+---
+question: |
+  Assets
+fields:
+  - "Do you own the home you live in?": has_land
+    datatype: yesnoradio
+  - note: <hr>
+  - "Do you own any other land or property?": land_not_lived_on
+    datatype: yesnoradio
+  - note: "About How much is the land or property you do not live on worth?"
+    show if:
+      variable: land_not_lived_on
+      is: true
+  - Value: realprop_val
+    datatype: currency
+    show if: 
+      variable: land_not_lived_on
+      is: true
+  - note: <hr>
+  - "Do you own any bank accounts, stocks, bonds, mutual funds, or other financial assets?": has_other_assets
+    datatype: yesnoradio
+  - note: "About how much are you bank accounts, stocks, bonds, mutual funds or other financial assets worth, in total?"
+    show if: 
+      variable: has_other_assets
+      is: true
+  - Value: other_assets_val
+    datatype: currency
+    show if:
+      variable: has_other_assets
+      is: true
+section: Financial
+---
+Question: |
+  Expenses
+Subquestion: |
+  Which of the following types of monthly expenses does your household have?
+fields:
+  - Rent: rent_yes_no
+    datatype: yesno
+  - How Much is Your Rent?: rent
+    datatype: currency
+    show if:
+      variable: rent_yes_no
+      is: True
+  - Mortgage: mortgage_yes_no
+    datatype: yesno
+  - How Much is Your Mortgage?: mortgage
+    datatype: currency
+    show if:
+      variable: mortgage_yes_no
+      is: True
+  - Child Care: child_care_yes_no
+    datatype: yesno
+  - How Much is Your Child Care?: childcare
+    datatype: currency
+    show if:
+      variable: child_care_yes_no
+      is: True
+  - Medical Expenses: medical_expenses_yes_no
+    datatype: yesno
+  - How Much are Your Medical Expenses?: medical_expenses
+    datatype: currency
+    show if: 
+      variable: medical_expenses_yes_no
+      is: True
+section: Financial
+---
+question: |
+  Household Members
+subquestion: |
+  Does anybody live in your household with you besides yourself?
+yesno: addl_hshld_members
+section: Financial
+---
+question: |
+  Household Members
+subquestion: |
+  Please tell me about the other people who live in your household.
+fields:
+  - First Name: people[i].name.first
+  - Last Name: people[i].name.last
+  - Suffix: people[i].name.suffix
+    required: false
+  - DOB: people[i].name.birthdate
+    datatype: date
+    hint: mm/dd/yyyy
+  - Relationship: people[i].relationship
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_relation_type_en.items()}
+  - Health Insurance Type : people[i].insurance
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_health_insurance_en.items()}
+  - Has a Disability?: people[i].disability
+    datatype: yesno
+list collect: True
+section: Financial
+script: |
+  <script>
+    var datefields = $('input[type=date]');
+    for (i=0; i < datefields.length; i++) {
+    datefields[i].type="text";
+    }
+  </script>
+---
+question: |
+  How much does your household get each month from...
+subquestion: |
+  *Note: Skip any items that do not apply to you.* 
+  
+  Income Type | Amount 
+  ------------|-------
+  Employment: | [FIELD employment] 
+  Second Employment: | [FIELD second_employment] 
+  Third Employment: | [FIELD third_employment] 
+  CalWorks or Cal-Learn (welfare): | [FIELD cw] 
+  General Assistance: | [FIELD ga] 
+  Social Security: | [FIELD ss] 
+  Supplemental Security Income (SSI):| [FIELD ssi] 
+  State Disability Insurance (SDI):| [FIELD sdi] 
+  Workers' Compensation: | [FIELD wc] 
+  Child or Spousal Support:| [FIELD cs] 
+  CAPI: | [FIELD capi] 
+  Private Disability Insurance: | [FIELD private_disability] 
+  Pension: | [FIELD pension] 
+  Veterans Benefits: | [FIELD vet_ben] 
+  Other: | [FIELD other_income] 
+fields:
+  - Employment: employment
+    datatype: currency
+    default: 0
+  - Second Employment: second_employment
+    datatype: currency
+    default: 0
+  - Third Employment: third_employment
+    datatype: currency
+    default: 0
+  - CalWorks or Cal-Learn (welfare): cw
+    datatype: currency
+    default: 0
+  - General Assistance (GA): ga
+    datatype: currency
+    default: 0
+  - Social Security: ss
+    datatype: currency
+    default: 0
+  - Supplemental Security Income (SSI): ssi
+    datatype: currency
+    default: 0
+  - State Disability Insurance (SDI): sdi
+    datatype: currency
+    default: 0
+  - Workers' Compensation: wc
+    datatype: currency
+    default: 0
+  - Child or Spousal Support: cs
+    datatype: currency
+    default: 0
+  - CAPI: capi
+    datatype: currency
+    default: 0
+  - Private Disability Insurance: private_disability
+    datatype: currency
+    default: 0
+  - Pension: pension
+    datatype: currency
+    default: 0
+  - Veterans Benefits: vet_ben
+    datatype: currency
+    default: 0
+  - Other: other_income
+    datatype: currency
+    default: 0
+section: Financial
+---
+question: |
+  How much does your household get each month from...
+subquestion: |
+  *Note: Skip any items that do not apply to you.* 
+  
+  Income Type | Amount | Whose is it?
+  ------------|--------|-------------
+  Employment: | [FIELD employment_multi] | [FIELD employment_multi_who]
+  Second Employment: | [FIELD second_employment_multi] | [FIELD second_employment_multi_who]
+  Third Employment: | [FIELD third_employment_multi] | [FIELD third_employment_multi_who]
+  CalWorks or Cal-Learn (welfare): | [FIELD cw_multi] | [FIELD cw_multi_who]
+  General Assistance: | [FIELD ga_multi] | [FIELD ga_multi_who]
+  Social Security: | [FIELD ss_multi] | [FIELD ss_multi_who]
+  Second Social Security: | [FIELD second_ss_multi] | [FIELD second_ss_multi_who]
+  Supplemental Security Income (SSI):| [FIELD ssi_multi] | [FIELD ssi_multi_who]
+  Second Supplemental Security Income (SSI):| [FIELD second_ssi_multi] | [FIELD second_ssi_multi_who]
+  State Disability Insurance (SDI):| [FIELD sdi_multi] | [FIELD sdi_multi_who]
+  Workers' Compensation: | [FIELD wc_multi] | [FIELD wc_multi_who]
+  Child or Spousal Support:| [FIELD cs_multi] | [FIELD cs_multi_who]
+  CAPI: | [FIELD capi_multi] | [FIELD capi_multi_who]
+  Private Disability Insurance: | [FIELD private_disability_multi] | [FIELD private_disability_multi_who]
+  Pension: | [FIELD pension_multi] | [FIELD pension_multi_who]
+  Veterans Benefits: | [FIELD vet_ben_multi] | [FIELD vet_ben_multi_who]
+  Other: | [FIELD other_income_multi] | [FIELD other_income_multi_who]
+fields:
+  - Employment: employment_multi
+    datatype: currency
+    default: 0
+  - Whose Is it?: employment_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - Second Employment: second_employment_multi
+    datatype: currency
+    default: 0
+  - Whose Is it?: second_employment_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - Third Employment: third_employment_multi
+    datatype: currency
+    default: 0
+  - Whose is it?: third_employment_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - CalWorks or Cal-Learn (welfare): cw_multi
+    datatype: currency
+    default: 0
+  - Whose is it?: cw_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - General Assistance (GA): ga_multi
+    datatype: currency
+    default: 0
+  - Whose is it?: ga_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - Social Security: ss_multi
+    datatype: currency
+    default: 0
+  - Whose is it?: ss_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - Second Social Security: second_ss_multi
+    datatype: currency
+    default: 0
+  - Whose Is it?: second_ss_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - Supplemental Security Income (SSI): ssi_multi
+    datatype: currency
+    default: 0
+  - Whose is it?: ssi_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - Second Supplemental Security Income (SSI): second_ssi_multi
+    datatype: currency
+    default: 0
+  - Whose is it?: second_ssi_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - State Disability Insurance (SDI): sdi_multi
+    datatype: currency
+    default: 0
+  - Whose is it?: sdi_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - Workers' Compensation: wc_multi
+    datatype: currency
+    default: 0
+  - Whose is it?: wc_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - Child or Spousal Support: cs_multi
+    datatype: currency
+    default: 0
+  - Whose is it?: cs_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - CAPI: capi_multi
+    datatype: currency
+    default: 0
+  - Whose is it?: capi_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - Private Disability Insurance: private_disability_multi
+    datatype: currency
+    default: 0
+  - Whose is it?: private_disability_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - Pension: pension_multi
+    datatype: currency
+    default: 0
+  - Whose is it?: pension_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - Veterans Benefits: vet_ben_multi
+    datatype: currency
+    default: 0
+  - Whose is it?: vet_ben_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - Other: other_income_multi
+    required: false
+    datatype: currency
+    default: 0
+  - Whose is it?: other_income_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+section: Financial
+---
+question: |
+  How did you hear about Legal Aid?
+fields:
+  - How did you hear about the Legal Aid Society of San Mateo County?: how_heard
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_referred_by_category_en.items()}
+  - Which Medical Provider: referral_med
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_referred_by_med_en.items()}
+    show if:
+      variable: how_heard
+      is: "2"
+  - Which Organization or Agency?: referral_org
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_referred_by_org_en.items()}
+    show if:
+      variable: how_heard
+      is: "1"
+  - Which Legal Services Agency?: referral_legal_aid
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_referred_by_legal_en.items()}
+    show if:
+      variable: how_heard
+      is: "3"
+  - Where Specifically: referral_other
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_referred_by_other_en.items()}
+    show if:
+      variable: how_heard
+      is: "4"
+  - Please describe: referral_other_other
+    show if:
+      variable: referral_other
+      is: "14"
+section: How Heard
+---
+question: | 
+  Gender Identity And Sexual Orientation
+subquestion: |
+  The questions on this screen are voluntary. You do not have to answer them.
+fields:
+  - Sex Assigned at Birth: sex
+    required: false
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_sex_en.items()}
+  - Gender Identity: gender_identity
+    required: false
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_gender_en.items()}
+  - Please specify: c4a_gender_notes
+    show if:
+      variable: gender_identity
+      is: "O"
+  - Sexual Orientation: sexual_orientation
+    required: false
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_orientation_en.items()}
+  - Please specify: c4a_identity_notes
+    show if:
+      variable: sexual_orientation
+      is: "O"
+section: Demographics
+---
+question: | 
+  Can you draw a signature on this device?
+subquestion: |
+  You will need to sign your application for services. Are you comfortable using a device with a touchscreen to sign your name or comfortable using a mouse to draw your signature? If not, you can also 'sign' the application by typing your signature. 
+field: ada_check
+buttons: 
+  - "I can draw a signature": True
+  - "I need to type a signature instead": False
+---
+question: Housing Cases
+fields:
+  - "Did you call Legal Aid SMC for help with a housing problem?": housing_case
+    datatype: yesnoradio
+  - note: "For housing cases, we require either documentation of household income in the form of recent pay stubs, tax returns, benefit statements or bank statements, or we require that you self-certify income with a signature. Since you are submitting your information online, you can self-certify the information you provided regarding your income using a signature on the next screen."
+    show if:
+      variable: housing_case
+      is: True
+  - note: "For housing cases we also require completion of a limited scope agreement. You will also be asked to agree to and sign this limited scope agreement online."
+    show if:
+      variable: housing_case
+      is: True
+section: Housing Cases
+---
+question: |
+  Sign your name
+subquestion: |
+  I am self-certifying the income of my household with my signature, rather than providing the required primary source documentation, because I am unable to provide any of the source documentation at this time.
+signature: housing_self_certification_regular
+#under: |
+#  I am self-certifying the income of my household with my signature, rather than providing the required primary source documentation, because I am unable to provide any of the source documentation at this time.
+css: |
+  <style>
+  .dasigbottompart {
+  padding-top: 20px;
+  text-align: left;
+  }
+  </style>
+section: Housing Cases
+---
+section: Housing Cases
+question: Limited Scope Legal Services - Terms
+subquestion: |
+  ###AGREEMENT FOR LIMITED SCOPE LEGAL SERVICES
+  
+  Legal Aid Society of San Mateo County staff and volunteers will meet with you and provide a free legal consultation about your housing issue. During that consultation, we will provide you with legal advice, and if appropriate we may assist you with completing legal forms or letter templates during the consultation. 
+
+  I understand that the staff and volunteers of Legal Aid Society of San Mateo County are providing only advice and limited services at the time of my scheduled consultation, and are not representing me in any capacity. I understand that if Legal Aid Society of San Mateo County agrees to represent me or provide additional legal services after my consultation, then an additional retainer agreement will be signed by me and Legal Aid Society of San Mateo County staff to confirm the nature of that representation or service.  
+  
+  I understand that Legal Aid Society of San Mateo County staff and volunteers will protect the confidentiality of all information shared by me in my legal consultation. Confidential information about my household and legal issue will be available only to the staff and volunteers of the network of legal services agencies who may work together to help me with my legal housing problems, which includes Legal Aid Society of San Mateo County, Community Legal Services in East Palo Alto, and the Stanford Community Law Clinic. These three agencies may work together and share information among lawyers who might be able to help me, in order to secure the most legal assistance available to me.  
+  
+  I understand that Legal Aid Society of San Mateo County is a nonprofit law office, and is providing free legal service to me based on my eligibility as a low income resident of San Mateo County.  
+continue button field: user_saw_terms
+continue button label: I agree, take me to the signature page.
+---
+section: Housing Cases
+question: |
+  AGREEMENT FOR LIMITED SCOPE LEGAL SERVICES
+subquestion: | 
+  Sign your name. To review the terms, please press the back button to return to the previous page.
+signature: housing_limited_scope_regular
+---
+section: Housing Cases
+question: |
+  Type your name
+subquestion: | 
+  "I am self-certifying the income of my household with my signature, rather than providing the required primary source documentation, because I am unable to provide any of the source documentation at this time."
+fields: 
+  - Type your full name: housing_self_certification_ada
+---
+section: Housing Cases
+question: |
+  Type your name
+subquestion: |
+  ###AGREEMENT FOR LIMITED SCOPE LEGAL SERVICES
+  
+  Legal Aid Society of San Mateo County staff and volunteers will meet with you and provide a free legal consultation about your housing issue. During that consultation, we will provide you with legal advice, and if appropriate we may assist you with completing legal forms or letter templates during the consultation. 
+  
+  I understand that the staff and volunteers of Legal Aid Society of San Mateo County are providing only advice and limited services at the time of my scheduled consultation, and are not representing me in any capacity. I understand that if Legal Aid Society of San Mateo County agrees to represent me or provide additional legal services after my consultation, then an additional retainer agreement will be signed by me and Legal Aid Society of San Mateo County staff to confirm the nature of that representation or service.  
+  
+  I understand that Legal Aid Society of San Mateo County staff and volunteers will protect the confidentiality of all information shared by me in my legal consultation. Confidential information about my household and legal issue will be available only to the staff and volunteers of the network of legal services agencies who may work together to help me with my legal housing problems, which includes Legal Aid Society of San Mateo County, Community Legal Services in East Palo Alto, and the Stanford Community Law Clinic. These three agencies may work together and share information among lawyers who might be able to help me, in order to secure the most legal assistance available to me.  
+      
+  I understand that Legal Aid Society of San Mateo County is a nonprofit law office, and is providing free legal service to me based on my eligibility as a low income resident of San Mateo County.
+fields: 
+  - Type your full name: housing_limited_scope_ada  
+---
+section: Signature
+question: |
+  Signature
+subquestion: |
+  I hereby certify under penalty of perjury that all information presented herein is true and correct to the best of my knowledge. I understand that making false declarations is a crime punishable by law. If necessary, I agree to provide documentation to verify my income. 
+signature: info_verify_sig
+under: 
+  ${ first_name } ${ last_name } ${ suffix }
+---
+section: Signature
+question: |
+  Signature
+subquestion: |
+  By typing my full legal name of ${ first_name } ${ last_name } ${ suffix } I certify that the information I have provided is correct to the best of my knowledge. I hereby certify under penalty of perjury that all information presented herein is true and correct to the best of my knowledge. I understand that making false declarations is a crime punishable by law. If necessary, I agree to provide documentation to verify my income. 
+fields: 
+  - The information provided is correct.: ada_info_verify_sig
+---
+section: Documents
+question: Documents
+subquestion: |
+  Please upload any documents related to the issue you are seeking legal help for, like notices from your landlord or a government agency or court documents.
+fields:
+  - File: user_file
+    datatype: file
+    required: false
+---
+prevent going back: True
+section: Submit
+sets: final_screen
+question: |
+  Your Application Has Been Submitted
+subquestion: |
+	Thank you for applying to LASSMC for help with your legal problem. Your application information has been automatically passed on to our intake team.</b>
+  
+  LASSMC will contact you to follow up by phone or email. The intake team may have additional questions for you, or you may be informed that we will not be able to assist you.
+  
+  In the unlikely event that you do not hear from us within a week, please call our intake line at (650) 558-0915. Thank you and be safe.
+buttons:
+  - Restart: restart

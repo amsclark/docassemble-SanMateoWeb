@@ -1,0 +1,171 @@
+---
+attachment:
+  filename: ada_verification_doc
+  variable name: ada_verification_doc
+  docx template file: ada_verification_doc.docx
+  valid formats: 
+    - pdf
+---
+attachment:
+  filename: verification_doc
+  variable name: verification_doc
+  docx template file: verification_doc.docx
+  valid formats: 
+    - pdf
+---
+attachment:
+  filename: ada_retainer_doc
+  variable name: ada_retainer_doc
+  docx template file: ada_retainer_doc.docx
+  valid formats:
+    - pdf
+---
+attachment:
+  filename: retainer_doc
+  variable name: retainer_doc
+  docx template file: retainer_doc.docx
+  valid formats: 
+    - pdf
+---
+attachment:
+  filename: ada_housing_cert_doc
+  variable name: ada_housing_cert_doc
+  docx template file: ada_housing_cert_doc.docx
+  valid formats: 
+    - pdf
+---
+attachment:
+  filename: housing_cert_doc
+  variable name: housing_cert_doc
+  docx template file: housing_cert_doc.docx
+  valid formats:
+    - pdf
+---
+objects:
+  people: DAList.using(object_type=Individual, there_are_any=True)
+---
+mandatory: True
+code: |
+  people.appendObject()
+---
+initial: True
+code: |
+  import base64
+  ip_address = device(ip=True)
+  set_language(user_language)
+  if user_language == "es":
+    set_live_help_status(availability='available', mode='help', partner_roles="Spanish")
+  else:
+    set_live_help_status(availability='available', mode='help', partner_roles="English")
+  user_saw_intro
+  first_name
+  mailing_address
+  main_phone
+  email
+  if oppo_person == True:
+    oppo_is_natural_person
+    if oppo_is_natural_person == True:
+      oppo_name = ""
+      oppo_first_name
+      oppo_address
+      oppo_phone
+      oppo_aliases
+      oppo_dob
+    else:
+      oppo_name
+      oppo_dob = ""
+      oppo_address
+      oppo_phone
+      oppo_aliases
+      oppo_first_name = ""
+      oppo_middle_initial = ""
+      oppo_last_name = ""
+      oppo_suffix = ""
+  else:
+    oppo_name = ""
+    oppo_dob = ""
+    oppo_address = ""
+    oppo_phone = ""
+    oppo_aliases = ""
+    oppo_first_name = ""
+    oppo_middle_initial = ""
+    oppo_last_name = ""
+    oppo_suffix = ""
+  language
+  marital
+  ethnicity
+  has_disability
+  gender_identity
+  has_land
+  rent_yes_no
+  if addl_hshld_members is True:
+    people[0].name.first
+    employment_multi
+  else:
+    employment
+  housing_case
+  if housing_case is True:
+    ada_check
+    if ada_check is True:
+      housing_self_certification_regular
+      raw_self_cert = housing_cert_doc.pdf.slurp(auto_decode=False)
+      b64_self_cert_doc = base64.b64encode(raw_self_cert).decode('ascii')
+      user_saw_terms
+      housing_limited_scope_regular
+      raw_retainer = retainer_doc.pdf.slurp(auto_decode=False)
+      b64_retainer_doc = base64.b64encode(raw_retainer).decode('ascii')
+      housing_self_certification_ada = ""
+      housing_limited_scope_ada = ""
+    else:
+      housing_self_certification_regular = ""
+      housing_limited_scope_regular = ""
+      housing_self_certification_ada
+      raw_self_cert_ada = ada_housing_cert_doc.pdf.slurp(auto_decode=False)
+      b64_self_cert_ada_doc = base64.b64encode(raw_self_cert_ada).decode('ascii')
+      housing_limited_scope_ada
+      raw_retainer_ada = ada_retainer_doc.pdf.slurp(auto_decode=False)
+      b64_retainer_ada_doc = base64.b64encode(raw_retainer_ada).decode('ascii')
+  how_heard
+  if ada_check is True:
+    info_verify_sig
+    raw_verification_doc = verification_doc.pdf.slurp(auto_decode=False)
+    b64_verification_doc = base64.b64encode(raw_verification_doc).decode('ascii')
+    ada_info_verify_sig = ""
+  else: 
+    ada_info_verify_sig
+    raw_ada_verification_doc = ada_verification_doc.pdf.slurp(auto_decode=False)
+    b64_ada_verification_doc = base64.b64encode(raw_ada_verification_doc).decode('ascii')
+    info_verify_sig = ""
+  user_file
+ 
+  import json
+  import requests
+  import time
+  import phonenumbers
+  from datetime import datetime
+  from datetime import timedelta
+  from requests.auth import HTTPBasicAuth
+  
+  user_file
+  if user_file is not None:
+    uploadedfilename = user_file[0].filename
+    contents = user_file.slurp(auto_decode=False)
+    b64_contents = base64.b64encode(contents).decode('ascii')
+  if user_file is None:
+    uploadedfilename = ""
+    b64_contents = ""
+  process_for_pika
+  
+  payload = json.dumps(casedata)
+  if not defined('already_sent'): 
+    r = requests.post('https://sanmateo.metatheria.solutions/cms/services/docassemble_xfer.php', data=payload, auth=HTTPBasicAuth(get_config('smc username'), get_config('smc password')), verify=False, timeout=20)
+    already_sent = True
+  need(final_screen)
+---
+question: |
+  What language do you speak?  (¿Qué idioma habla?)
+choices:
+  - "English": en
+  - "Español": es
+field: user_language
+---

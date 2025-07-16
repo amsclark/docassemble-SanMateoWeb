@@ -1,0 +1,808 @@
+default language: es
+---
+question: |
+  Información sobre la Aplicación
+subquestion: |
+    <p>La Sociedad de Ayuda Legal del Condado de San Mateo es una firma de abogados privada sin fines de lucro que brinda servicios legales gratuitos a personas y familias elegibles. Esta aplicación de detección es nuestra forma de recopilar la información que necesitamos para completar los siguientes tres pasos: </p>
+    
+    <p style="margin-left: 20px"><strong>1. Primero debemos verificar para asegurarnos de que no tenemos un <span style = "text-decoration: underline"> conflicto de intereses </span> debido a nuestra representación anterior o actual de alguien relacionado con su caso. </strong > Para hacer esto, necesitamos la ortografía correcta tanto de su nombre como del nombre de la parte adversa.</p>
+
+    <p>Si existe un conflicto de intereses, LASSMC no podrá ayudarlo. Le informaremos lo antes posible que no podemos brindarle ningún consejo o representación legal. </p>
+    
+    <p style="margin-left: 20px"><strong>2. Luego, debemos verificar para asegurarnos de que usted es <span style = "text-decoration: underline"> financieramente elegible </span> para nuestros servicios.</strong></p>
+    
+    <p>Se toma una determinación preliminar sobre su elegibilidad financiera para nuestros servicios de acuerdo con la información de ingresos y activos en la solicitud, sujeta a una evaluación más exhaustiva más adelante.</p>
+    
+    <p style="margin-left: 20px"><strong>3. Finalmente, debemos evaluar su caso para ver si su situación cumple con las prioridades <span style = "text-decoration: underline"> de nuestra oficina.</span></strong></p>
+    
+    <p>LASSMC tiene recursos limitados, por lo que debemos priorizar los casos que tomamos. Las prioridades son establecidas y aprobadas por nuestra junta directiva. Una copia de nuestras prioridades está disponible a pedido. </p>
+    
+    <p class="text-center" style="border: 1px solid black; padding:20px"><strong>TENGA EN CUENTA QUE EN ESTE MOMENTO NUESTRA OFICINA NO LO REPRESENTA Y LA INFORMACIÓN QUE USTED PROPORCIONA EN ESTA SOLICITUD NO DEBE CONSIDERARSE PRIVILEGIADA Y DE NINGUNA MANERA CREA UNA RELACIÓN DE ABOGADO CLIENTE ENTRE USTED Y LA SOCIEDAD DE AYUDA LEGAL DEL CONDADO DE SAN MATEO</strong></p>
+    
+    <p>Haremos todo lo posible para informarle si podemos aceptar su caso dentro de las <strong> dos semanas </strong> posteriores a la recepción de su solicitud. Háganos saber si tiene una situación de emergencia e intentaremos atender su solicitud de manera acelerada.</p>
+continue button field: user_saw_intro
+section: Inicio
+---
+section: Nombre e información de contacto
+question: |
+  Cual es su nombre?
+fields:
+  - Primer Nombre: first_name
+    hint: Guadalupe
+  - Inicial del segundo nombre: middle_initial
+    hint: J
+    required: false
+  - Apellido o Apellidos (si tiene dos): last_name
+    hint: Doe
+  - Sufijo: suffix
+    hint: Jr.
+    required: false
+  - Otros nombres por los que se le ha conocido, incluido el apellido de soltera: aliases
+    hint: Lupe J. Doe
+    required: false
+  - Fecha de Nacimiento: birth_date
+    datatype: date
+    hint: mm/dd/yyyy
+  - Tipo de Cobertura de Seguro Médico: coverage
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_health_insurance_es.items()}
+progress: 5
+script: | 
+  <script>
+    document.querySelector("#YmlydGhfZGF0ZQ").type = "text"
+  </script>
+---
+question: |
+  Correo Electrónico:
+subquestion: |
+  ¿Cuál es su dirección de correo electrónico?.
+fields: 
+  - Correo Electrónico:: email
+    datatype: email
+    required: false
+section: Nombre e información de contacto
+---
+question: |
+  Dirección
+subquestion: |
+  Si no tiene hogar, ingrese alguna dirección donde pueda recibir correo, como la dirección de un refugio o la dirección de un amigo.
+fields:
+  - Dirección: mailing_address
+  - Número de Apartamento: apt_number
+    required: false
+  - Ciudad: city
+  - Estado: state
+    input type: dropdown
+    code: |
+      {value:key for key, value in us_state_abbrev.items()}
+    default: California
+  - Código Postal: zipcode
+    datatype: integer
+    minlength: 5
+    maxlength: 5
+section: Nombre e información de contacto
+---
+question: |
+  Teléfono de Casa
+fields:
+  - Número de Teléfono Principal: main_phone
+    required: false
+  - Está bien enviarme un mensaje de texto a mi número de teléfono principal: sms_ok_main
+    datatype: yesnowide
+  - Teléfono Alternativo: alt_phone
+    required: false
+  - Está bien enviarme un mensaje de texto a mi número de teléfono alternativo: sms_ok_alt
+    datatype: yesnowide
+validation code: |
+  if len(main_phone) > 0:
+    home_phone = phone_number_formatted(main_phone)
+    if phone_number_is_valid(main_phone) != True:
+      validation_error("Ingresa un número de teléfono principal válido de 10 dígitos, incluido el código de área.")
+  if len(alt_phone) > 0:
+    alt_phone = phone_number_formatted(alt_phone)
+    if phone_number_is_valid(alt_phone) != True:
+      validation_error("El número de teléfono alternativo no es válido. Asegúrese de haber ingresado un número de 10 dígitos, incluido el código de área")
+  if len(main_phone) == 0 and len(alt_phone) == 0:
+    validation_error("Ingrese al menos un número de teléfono")
+section: Nombre e información de contacto
+---
+question: |
+  ¿Su problema legal involucra a una parte contraria (por ejemplo, un propietario, un cobrador de deudas o un ex novio)?
+yesno: oppo_person
+section: Contra Partes
+---
+question: |
+  ¿La parte contraria es una persona o una empresa?
+field: oppo_is_natural_person
+buttons:
+  - "Una persona": True
+  - "Una empresa": False
+  - "No sé": False
+section: Contra Partes
+---
+question: |
+  ¿Cuál es el nombre de la parte contraria (si lo sabe)?
+fields:
+  - name: oppo_name
+    required: false
+section: Contra Partes
+---
+question: |
+  ¿Cuál es el nombre de la parte contraria (si lo sabe)?
+fields:
+  - Primer nombre: oppo_first_name
+    hint: Guadalupe
+    required: false
+  - Inicial del segundo nombre: oppo_middle_initial
+    hint: J
+    required: false
+  - Apellido o Apellidos (si tiene dos): oppo_last_name
+    hint: Doe
+    required: false
+  - Sufijo: oppo_suffix
+    hint: Jr.
+    required: false
+section: Contra Partes
+---
+question: |
+  ¿Cuál es la fecha de nacimiento de la parte contraria? (Si usted sabe)
+fields:
+  - dob: oppo_dob
+    datatype: date
+    required: false
+    hint: mm/dd/yyyy
+section: Contra Partes
+script: | 
+  <script>
+    document.querySelector("#b3Bwb19kb2I").type = "text"
+    document.getElementById('b3Bwb19kb2I').value = '';
+  </script>
+---
+question: |
+  ¿Cuál es la dirección de la parte contraria? (Si usted sabe)
+fields:
+  - address: oppo_address
+    required: false
+  - city: oppo_city
+    required: false
+  - state: oppo_state
+    required: false
+    input type: dropdown
+    code: |
+      {value:key for key, value in us_state_abbrev.items()}
+  - zip: oppo_zip
+    required: false
+    datatype: integer
+    minlength: 5
+    maxlength: 5
+section: Contra Partes
+---
+question: |
+  ¿Cuál es el número de teléfono de la parte contraria? (Si usted sabe)
+fields:
+  - phone: oppo_phone
+    required: false
+validation code: |
+  if len(oppo_phone) > 0:
+    oppo_phone = phone_number_formatted(oppo_phone)
+    if phone_number_is_valid(oppo_phone) != True:
+      validation_error("Este número de teléfono no es válido. Asegúrese de haber ingresado un número de 10 dígitos, incluido el código de área")
+section: Contra Partes
+---
+question: |
+  ¿La parte contraria tiene otros nombres? (Si usted sabe)
+fields:
+  - Otros Nombres: oppo_aliases
+    required: false
+section: Contra Partes
+---
+question: |
+  ¿Cual es su idioma principal?
+fields:
+  - Idioma: language
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_language_es.items()}
+  - ¿Te gustaría tener un intérprete?: interpreter
+    datatype: yesnoradio
+    js show if: |
+      val("language") != "4" && val("language") != ""
+section: Demografía
+script: |
+  <script>
+    // this rearranges the dropdown list. It's based on numerical indexes so if the language optiosn change you'll need to change the indexes
+    select = document.querySelector("#bGFuZ3VhZ2U");
+    english = document.querySelector("#bGFuZ3VhZ2U > option:nth-child(8)");
+    document.querySelector("#bGFuZ3VhZ2U > option:nth-child(8)").remove();
+    spanish = document.querySelector("#bGFuZ3VhZ2U > option:nth-child(6)");
+    document.querySelector("#bGFuZ3VhZ2U > option:nth-child(6)").remove();
+    select.add(spanish, 1);
+    select.add(english, 2);
+  </script>
+---
+question: |
+  Interprete
+subquestion: |
+  Nos gustaría determinar si prefiere comunicarse con un intérprete, que le proporcionaremos. ¿Le gustaría tener un intérprete?
+field: interpreter
+buttons:
+  - "Sí": True
+  - "No": False
+section: Demografía
+---
+question: |
+  Estado Civil:
+fields:
+  - Estado Civil: marital
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_marital_es.items()}
+section: Demografía
+---
+question: |
+  Etnia
+fields:
+  - Hispano: hispanic
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_hispanic_es.items()}
+  - Etnia: ethnicity
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_ethnicity_es.items()}
+  - Especifique con sus propias palabras: ethnic_description
+    required: false
+    show if: 
+      variable: ethnicity
+      is: "57"
+section: Demografía
+---
+question: |
+  Demografía
+subquestion: |
+  Marque todo lo que corresponda
+fields: 
+  - Tengo una discapacidad mental, física o de otro tipo.: has_disability
+    datatype: yesnowide
+  - He servido en el ejército, incluidas las Reservas o la Guardia Nacional.: veteran
+    datatype: yesnowide
+  - Yo o alguien que vive conmigo en algún momento hemos sido amenazados o lastimados por un miembro de la familia o pareja.: dv_victim
+    datatype: yesnowide
+section: Demografía
+---
+question: |
+  Activos
+fields:
+  - "¿Es dueño de la casa en la que vive?": has_land
+    datatype: yesnoradio
+  - note: <hr>
+  - "¿Tiene alguna otra tierra o propiedad?": land_not_lived_on
+    datatype: yesnoradio
+  - note: "Aproximadamente ¿Cuánto vale la tierra o propiedad en la que no vive?"
+    show if:
+      variable: land_not_lived_on
+      is: true
+  - Valor: realprop_val
+    datatype: currency
+    show if: 
+      variable: land_not_lived_on
+      is: true
+  - note: <hr>
+  - "¿Tiene cuentas bancarias, acciones, bonos, fondos mutuos u otros activos financieros?": has_other_assets
+    datatype: yesnoradio
+  - note: "Aproximadamente, ¿cuánto valen en total sus cuentas bancarias, acciones, bonos, fondos mutuos u otros activos financieros?"
+    show if: 
+      variable: has_other_assets
+      is: true
+  - Valor: other_assets_val
+    datatype: currency
+    show if:
+      variable: has_other_assets
+      is: true
+section: Financiero
+---
+Question: |
+  Gastos
+Subquestion: |
+  ¿Cuál de los siguientes tipos de gastos mensuales tiene su hogar?:
+fields:
+  - Renta: rent_yes_no
+    datatype: yesno
+  - ¿Cuánto pagas de renta?: rent
+    datatype: currency
+    show if:
+      variable: rent_yes_no
+      is: True
+  - Hipoteca: mortgage_yes_no
+    datatype: yesno
+  - ¿A cuánto asciende su hipoteca?: mortgage
+    datatype: currency
+    show if:
+      variable: mortgage_yes_no
+      is: True
+  - Cuidado Infantil: childcare_yes_no
+    datatype: yesno
+  - ¿Cuánto cuesta el cuidado infantil?: childcare
+    datatype: currency
+    show if:
+      variable: childcare_yes_no
+      is: True
+  - Gastos Médicos: medical_expenses_yes_no
+    datatype: yesno
+  - ¿A cuánto ascienden sus gastos médicos?: medical_expenses
+    datatype: currency
+    show if:
+      variable: medical_expenses_yes_no
+      is: True
+section: Financiero
+---
+question: |
+  Los Miembros Del Hogar
+subquestion: |
+  ¿Alguien vive en su hogar con usted además de usted?
+yesno: addl_hshld_members
+section: Financiero
+---
+question: |
+  Los Miembros Del Hogar
+subquestion: |
+  Por favor enliste cada persona que vive con usted
+fields:
+  - Nombre: people[i].name.first
+  - Apellido: people[i].name.last
+  - Sufijo: people[i].name.suffix
+    required: false
+  - Fecha de Nacimiento: people[i].name.birthdate
+    datatype: date
+    hint: mm/dd/yyyy
+  - Relación: people[i].relationship
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_relation_type_es.items()}
+  - Seguro de Salud: people[i].insurance
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_health_insurance_es.items()}
+  - ¿Tiene alguna discapacidad?: people[i].disability
+    datatype: yesno
+list collect: True
+section: Financiero
+script: |
+  <script>
+    var datefields = $('input[type=date]');
+    for (i=0; i < datefields.length; i++) {
+    datefields[i].type="text";
+    }
+  </script>
+---
+question: |
+  ¿Cuánto recibe cada mes de ...
+subquestion: |
+  *Omita cualquier elemento que no se aplique a su caso.*
+  
+  Tipo de ingresos | Cantidad 
+  ------------|-------
+  Empleo: | [FIELD employment] 
+  Segundo Empleo | [FIELD second_employment]
+  Tercer Empleo | [FIELD third_employment]
+  CalWorks o Cal-Learn (asistencia social): | [FIELD cw] 
+  Asistencia General: | [FIELD ga] 
+  Seguridad Social: | [FIELD ss] 
+  Ingreso de Seguridad Suplementario (SSI):| [FIELD ssi] 
+  Seguro Estatal Por Discapacidad (SDI):| [FIELD sdi] 
+  Compensación para trabajadores: | [FIELD wc] 
+  Manutención de los hijos o del cónyuge: | [FIELD cs] 
+  CAPI: | [FIELD capi] 
+  Seguro de discapacidad privado: | [FIELD private_disability] 
+  Pensión: | [FIELD pension] 
+  Beneficios para veteranos: | [FIELD vet_ben] 
+  Otros: | [FIELD other_income] 
+fields:
+  - Employment: employment
+    datatype: currency
+    default: 0
+  - Second Employment: second_employment
+    datatype: currency
+    default: 0
+  - Third Employment: third_employment
+    datatype: currency
+    default: 0
+  - CalWorks or Cal-Learn (welfare): cw
+    datatype: currency
+    default: 0
+  - General Assistance (GA): ga
+    datatype: currency
+    default: 0
+  - Social Security: ss
+    datatype: currency
+    default: 0
+  - Supplemental Security Income (SSI): ssi
+    datatype: currency
+    default: 0
+  - State Disability Insurance (SDI): sdi
+    datatype: currency
+    default: 0
+  - Workers' Compensation: wc
+    datatype: currency
+    default: 0
+  - Child or Spousal Support: cs
+    datatype: currency
+    default: 0
+  - CAPI: capi
+    datatype: currency
+    default: 0
+  - Private Disability Insurance: private_disability
+    datatype: currency
+    default: 0
+  - Pension: pension
+    datatype: currency
+    default: 0
+  - Veterans Benefits: vet_ben
+    datatype: currency
+    default: 0
+  - Other: other_income
+    datatype: currency
+    default: 0
+section: Financiero
+---
+question: |
+  ¿Cuánto recibe su hogar cada mes de ...
+subquestion: |
+  *Omita cualquier elemento que no se aplique a su caso.*
+
+  Tipo de Ingresos | Cantidad | ¿De quien es?
+  ------------|--------|-------------
+  Empleo: | [FIELD employment_multi] | [FIELD employment_multi_who]
+  Segundo Empleo: | [FIELD second_employment_multi] | [FIELD second_employment_multi_who]
+  Tercer Empleo: | [FIELD third_employment_multi] | [FIELD third_employment_multi_who]
+  CalWorks o Cal-Learn (asistencia social): | [FIELD cw_multi] | [FIELD cw_multi_who]
+  Asistencia general: | [FIELD ga_multi] | [FIELD ga_multi_who]
+  Seguridad Social: | [FIELD ss_multi] | [FIELD ss_multi_who]
+  Segundo Seguridad Social: | [FIELD second_ss_multi] | [FIELD second_ss_multi_who]
+  Ingreso de seguridad suplementario (SSI): | [FIELD ssi_multi] | [FIELD ssi_multi_who]
+  Segundo Ingreso de seguridad suplementario (SSI): | [FIELD second_ssi_multi] | [FIELD second_ssi_multi_who]
+  Seguro estatal por discapacidad (SDI):| [FIELD sdi_multi] | [FIELD sdi_multi_who]
+  Compensación para trabajadores: | [FIELD wc_multi] | [FIELD wc_multi_who]
+  Manutención de los hijos o del cónyuge: | [FIELD cs_multi] | [FIELD cs_multi_who]
+  CAPI: | [FIELD capi_multi] | [FIELD capi_multi_who]
+  Seguro de discapacidad privado: | [FIELD private_disability_multi] | [FIELD private_disability_multi_who]
+  Pensión: | [FIELD pension_multi] | [FIELD pension_multi_who]
+  Beneficios para veteranos: | [FIELD vet_ben_multi] | [FIELD vet_ben_multi_who]
+  Otros: | [FIELD other_income_multi] | [FIELD other_income_multi_who]
+fields:
+  - Employment: employment_multi
+    datatype: currency
+    default: 0
+  - Whose Is it?: employment_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - Employment: second_employment_multi
+    datatype: currency
+    default: 0
+  - Whose Is it?: second_employment_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - Employment: third_employment_multi
+    datatype: currency
+    default: 0
+  - Whose Is it?: third_employment_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - CalWorks or Cal-Learn (welfare): cw_multi
+    datatype: currency
+    default: 0
+  - Whose is it?: cw_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - General Assistance (GA): ga_multi
+    datatype: currency
+    default: 0
+  - Whose is it?: ga_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - Social Security: ss_multi
+    datatype: currency
+    default: 0
+  - Whose is it?: ss_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - Social Security: second_ss_multi
+    datatype: currency
+    default: 0
+  - Whose is it?: second_ss_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - Supplemental Security Income (SSI): ssi_multi
+    datatype: currency
+    default: 0
+  - Whose is it?: ssi_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - Supplemental Security Income (SSI): second_ssi_multi
+    datatype: currency
+    default: 0
+  - Whose is it?: second_ssi_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - State Disability Insurance (SDI): sdi_multi
+    datatype: currency
+    default: 0
+  - Whose is it?: sdi_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - Workers' Compensation: wc_multi
+    datatype: currency
+    default: 0
+  - Whose is it?: wc_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - Child or Spousal Support: cs_multi
+    datatype: currency
+    default: 0
+  - Whose is it?: cs_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - CAPI: capi_multi
+    datatype: currency
+    default: 0
+  - Whose is it?: capi_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - Private Disability Insurance: private_disability_multi
+    datatype: currency
+    default: 0
+  - Whose is it?: private_disability_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - Pension: pension_multi
+    datatype: currency
+    default: 0
+  - Whose is it?: pension_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - Veterans Benefits: vet_ben_multi
+    datatype: currency
+    default: 0
+  - Whose is it?: vet_ben_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+  - Other: other_income_multi
+    required: false
+    datatype: currency
+    default: 0
+  - Whose is it?: other_income_multi_who
+    required: false
+    input type: dropdown
+    code: |
+      people_object_to_dict(first_name + " " + last_name + " " + suffix, people)
+section: Financiero
+---
+
+question: |
+  ¿Cómo escuchó acerca de Legal Aid?
+fields:
+  - ¿Cómo se enteró de la Sociedad de Ayuda Legal del Condado de San Mateo?: how_heard
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_referred_by_category_es.items()}
+  - Qué proveedor médico: referral_med
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_referred_by_med_es.items()}
+    show if:
+      variable: how_heard
+      is: "2"
+  - ¿Qué organización o agencia?: referral_org
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_referred_by_org_es.items()}
+    show if:
+      variable: how_heard
+      is: "1"
+  - ¿Qué agencia de servicios legales?: referral_legal_aid
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_referred_by_legal_es.items()}
+    show if:
+      variable: how_heard
+      is: "3"
+  - ¿Dónde específicamente?: referral_other
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_referred_by_other_es.items()}
+    show if:
+      variable: how_heard
+      is: "4"
+  - Por favor describa: referral_other_other
+    show if:
+      variable: referral_other
+      is: "14"
+section: ¿Cómo escuchó?
+---
+question: | 
+  Identidad de Género y Orientación Sexual
+subquestion: |
+  Las siguientes tres preguntas son voluntarias. No tiene que responderlas.
+fields:
+  - Sexo asignado al nacer: sex
+    required: false
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_sex_es.items()}
+  - Identidad de Género: gender_identity
+    required: false
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_gender_es.items()}
+  - Especifique aquí: c4a_gender_notes
+    required: false
+    show if:
+      variable: gender_identity
+      is: "NL"
+  - Orientación Sexual: sexual_orientation
+    required: false
+    input type: dropdown
+    code: |
+      {value:key for key, value in menu_orientation_es.items()}
+  - Especifique aquí: c4a_identity_notes
+    required: false
+    show if:
+      variable: sexual_orientation
+      is: "O"
+section: Demografía
+---
+question: | 
+  ¿Puedes dibujar una firma en este dispositivo?
+subquestion: |
+  Deberá firmar su solicitud de servicios. ¿Se siente cómodo usando un dispositivo con pantalla táctil para firmar su nombre o cómodo usando un mouse para dibujar su firma? Si no es así, también puede "firmar" la solicitud escribiendo su firma.
+field: ada_check
+buttons: 
+  - "Puedo dibujar una firma": True
+  - "Necesito escribir una firma en su lugar": False
+---
+section: Casos de vivienda
+question: Casos de vivienda
+fields:
+  - "¿Llamó a Legal Aid SMC para obtener ayuda con un problema de vivienda?": housing_case
+    datatype: yesnoradio
+  - note: "Para los casos de vivienda, requerimos documentación de los ingresos del hogar en forma de talones de pago recientes, declaraciones de impuestos, declaraciones de beneficios o estados de cuenta bancarios, o requerimos que autocertifique sus ingresos con una firma. Dado que está enviando su información en línea, puede autocertificar la información que proporcionó con respecto a sus ingresos utilizando una firma en la siguiente pantalla."
+    show if:
+      variable: housing_case
+      is: True
+  - note: "Para los casos de vivienda, también requerimos la finalización de un acuerdo de alcance limitado. También se le pedirá que acepte y firme este acuerdo de alcance limitado en línea."
+    show if:
+      variable: housing_case
+      is: True
+---
+section: Casos de vivienda
+question: |
+  Firma con su nombre
+subquestion: |
+  "Estoy autocertificando los ingresos de mi hogar con mi firma, en lugar de proporcionar la documentación de fuente primaria requerida, porque no puedo proporcionar ninguna de la documentación de fuente en este momento."
+signature: housing_self_certification_regular
+css: |
+  <style>
+  .dasigbottompart {
+  padding-top: 20px;
+  text-align: left;
+  }
+  </style>
+---
+section: Casos de vivienda
+question: Servicios Legales De Alcance Limitado - Términos
+subquestion: |
+  ### ACUERDO DE SERVICIOS LEGALES DE ALCANCE LIMITADO
+  
+  El personal y los voluntarios de la Sociedad de Ayuda Legal del Condado de San Mateo se reunirán con usted y le brindarán una consulta legal gratuita sobre su problema de vivienda. Durante esa consulta, le brindaremos asesoramiento legal y, si corresponde, podemos ayudarlo a completar formularios legales o plantillas de cartas durante la consulta. 
+  
+  Entiendo que el personal y los voluntarios de la Sociedad de Ayuda Legal del Condado de San Mateo solo brindan asesoramiento y servicios limitados en el momento de mi consulta programada, y no me representan de ninguna manera. Entiendo que si la Sociedad de Ayuda Legal del Condado de San Mateo acepta representarme o proporcionar servicios legales adicionales después de mi consulta, entonces yo y el personal de la Sociedad de Ayuda Legal del Condado de San Mateo firmarán un acuerdo de retención adicional para confirmar la naturaleza de esa representación. o servicio.  
+  
+  Entiendo que el personal y los voluntarios de la Sociedad de Ayuda Legal del Condado de San Mateo protegerán la confidencialidad de toda la información compartida por mí en mi consulta legal. La información confidencial sobre mi hogar y el problema legal estará disponible solo para el personal y los voluntarios de la red de agencias de servicios legales que pueden trabajar juntas para ayudarme con mis problemas legales de vivienda, que incluye la Sociedad de Ayuda Legal del Condado de San Mateo, Servicios Legales Comunitarios en East Palo Alto y la Clínica de Derecho Comunitario de Stanford. Estas tres agencias pueden trabajar juntas y compartir información entre abogados que podrían ayudarme, a fin de asegurar la mayor asistencia legal disponible para mí.  
+  
+  Entiendo que la Sociedad de Ayuda Legal del Condado de San Mateo es una oficina legal sin fines de lucro y me brinda servicios legales gratuitos en función de mi elegibilidad como residente de bajos ingresos del condado de San Mateo.
+continue button field: user_saw_terms
+continue button label: Estoy de acuerdo, llévame a la página de firmas.
+---
+section: Casos de vivienda
+question: |
+  ACUERDO DE SERVICIOS LEGALES DE ALCANCE LIMITADO
+subquestion: |
+  Firma con tu nombre. Para revisar los términos, presione el botón Atrás para regresar a la página anterior.
+signature: housing_limited_scope_regular
+---
+section: Casos de vivienda
+question: |
+  Escriba su nombre
+subquestion: | 
+  "Estoy autocertificando los ingresos de mi hogar con mi firma, en lugar de proporcionar la documentación de fuente primaria requerida, porque no puedo proporcionar ninguna de la documentación de fuente en este momento."
+fields: 
+  - Escriba su nombre completo: housing_self_certification_ada
+---
+section: Casos de vivienda
+question: |
+  Escriba su nombre
+subquestion: |
+  ### ACUERDO DE SERVICIOS LEGALES DE ALCANCE LIMITADO
+  
+  El personal y los voluntarios de la Sociedad de Ayuda Legal del Condado de San Mateo se reunirán con usted y le brindarán una consulta legal gratuita sobre su problema de vivienda. Durante esa consulta, le brindaremos asesoramiento legal y, si corresponde, podemos ayudarlo a completar formularios legales o plantillas de cartas durante la consulta.
+  
+  Entiendo que el personal y los voluntarios de la Sociedad de Ayuda Legal del Condado de San Mateo solo brindan asesoramiento y servicios limitados en el momento de mi consulta programada, y no me representan de ninguna manera. Entiendo que si la Sociedad de Ayuda Legal del Condado de San Mateo acepta representarme o proporcionar servicios legales adicionales después de mi consulta, entonces yo y el personal de la Sociedad de Ayuda Legal del Condado de San Mateo firmarán un acuerdo de retención adicional para confirmar la naturaleza de esa representación. o servicio.  
+  
+  Entiendo que el personal y los voluntarios de la Sociedad de Ayuda Legal del Condado de San Mateo protegerán la confidencialidad de toda la información compartida por mí en mi consulta legal. La información confidencial sobre mi hogar y el problema legal estará disponible solo para el personal y los voluntarios de la red de agencias de servicios legales que pueden trabajar juntas para ayudarme con mis problemas legales de vivienda, que incluye la Sociedad de Ayuda Legal del Condado de San Mateo, Servicios Legales Comunitarios en East Palo Alto y la Clínica de Derecho Comunitario de Stanford. Estas tres agencias pueden trabajar juntas y compartir información entre abogados que podrían ayudarme, a fin de asegurar la mayor asistencia legal disponible para mí.  
+  
+  Entiendo que la Sociedad de Ayuda Legal del Condado de San Mateo es una oficina legal sin fines de lucro y me brinda servicios legales gratuitos en función de mi elegibilidad como residente de bajos ingresos del condado de San Mateo.
+fields: 
+  - Escriba su nombre completo: housing_limited_scope_ada
+---
+section: Firma
+question: |
+  Firma
+subquestion: |
+  Yo certifico bajo la penalidad de falso testimonio que toda la información declarada es verdadera y correcta según mi mejor entendimiento.  Entiendo que hacer declaraciones falsas es un crimen que conlleva penalidades bajo la ley.  Si es necesario, proporcionaré documentación para verificar mi ingreso.
+signature: info_verify_sig
+under: 
+  ${ first_name } ${ last_name } ${ suffix }
+---
+section: Firma
+question: |
+  Firma
+subquestion: |
+  Al escribir mi nombre legal completo de ${ first_name } ${ last_name } ${ suffix }, certifico que la información que he proporcionado es correcta a mi leal saber y entender. Por la presente certifico bajo pena de perjurio que toda la información aquí presentada es verdadera y correcta a mi leal saber y entender. Entiendo que hacer declaraciones falsas es un delito castigado por la ley. Si es necesario, acepto proporcionar documentación para verificar mis ingresos.
+fields: 
+  - La información proporcionada es correcta.: ada_info_verify_sig
+---
+section: Documentos
+question: Documentos
+subquestion: |
+  Cargue cualquier documento relacionado con el problema para el que está buscando ayuda legal, como avisos de su arrendador o de una agencia gubernamental o documentos judiciales.
+fields:
+  - Archivo: user_file
+    datatype: file
+    required: false
+---
+prevent going back: True
+section: Presentar
+sets: final_screen
+question: |
+  Tu solicitud ha sido enviada
+subquestion: |
+	Gracias por solicitar ayuda a LASSMC con su problema legal. La información de su solicitud se ha transmitido automáticamente a nuestro equipo de admisión. </b>
+  
+   LASSMC se comunicará con usted para realizar un seguimiento por teléfono o correo electrónico. El equipo de admisión puede tener preguntas adicionales para usted, o es posible que se le informe que no podremos ayudarlo.
+  
+   En el caso poco probable de que no tenga noticias nuestras dentro de una semana, llame a nuestra línea de admisión al (650) 558-0915. Gracias y mantente a salvo.
+buttons:
+  - Reanudar: restart
