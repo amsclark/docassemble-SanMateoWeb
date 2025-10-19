@@ -698,7 +698,7 @@ question: Casos de vivienda
 fields:
   - "¿Llamó a Legal Aid SMC para obtener ayuda con un problema de vivienda?": housing_case
     datatype: yesnoradio
-  - note: "Para los casos de vivienda, requerimos documentación de los ingresos del hogar en forma de talones de pago recientes, declaraciones de impuestos, declaraciones de beneficios o estados de cuenta bancarios, o requerimos que autocertifique sus ingresos con una firma. Dado que está enviando su información en línea, puede autocertificar la información que proporcionó con respecto a sus ingresos utilizando una firma en la siguiente pantalla."
+  - note: "Necesitamos comprobantes de ingresos de todos los adultos en su hogar, como talonarios de pago, declaraciones de impuestos, comprobantes de beneficios o estados de cuenta bancarios. Como está solicitando en línea, puede certificar sus ingresos ahora firmando en la siguiente pantalla. Le pediremos los documentos más adelante."
     show if:
       variable: housing_case
       is: True
@@ -766,6 +766,32 @@ subquestion: |
   Entiendo que la Sociedad de Ayuda Legal del Condado de San Mateo es una oficina legal sin fines de lucro y me brinda servicios legales gratuitos en función de mi elegibilidad como residente de bajos ingresos del condado de San Mateo.
 fields: 
   - Escriba su nombre completo: housing_limited_scope_ada
+---
+section: Casos de vivienda
+question: |
+  ¿Cómo afectó el COVID-19 a usted y a su familia? (Marque todas las opciones que correspondan)
+fields:
+  - 'Me contagié de COVID o tuve que cuidar a alguien que lo tuvo': c19_gotcovid
+    datatype: yesno
+  - 'Perdí mi empleo o me redujeron las horas de trabajo': c19_lostjob
+    datatype: yesno
+  - 'Un miembro de mi familia que vive conmigo perdió su empleo o le redujeron las horas de trabajo': c19_famlostjob
+    datatype: yesno
+  - 'Mi negocio ganó menos dinero': c19_bizlessmoney
+    datatype: yesno
+  - 'Tuvimos más necesidades o gastos de cuidado infantil o cuidado familiar': c19_morecarecosts
+    datatype: yesno
+  - 'Tuvimos más gastos médicos': c19_moremedicalcosts
+    datatype: yesno
+  - 'Tuvimos dificultades para pagar el alquiler, la hipoteca o los servicios públicos': c19_rentutilstrouble
+    datatype: yesno
+  - 'Otro': c19_other
+    datatype: yesno
+  - 'Si seleccionó "Otro", por favor explique': c19_otherexplain
+    required: false
+  - 'Mi familia no fue afectada por el COVID-19': c19_notaffected
+    datatype: yesno
+continue button field: saw_c19_checkboxes
 ---
 section: Firma
 question: |

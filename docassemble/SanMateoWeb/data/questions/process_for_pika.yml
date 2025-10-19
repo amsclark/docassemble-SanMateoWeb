@@ -225,6 +225,17 @@ code: |
     b64_contents = ""
   if not defined('uploadedfilename'):
     uploadedfilename = ""
+  if not defined('saw_c19_checkboxes'):
+    c19_gotcovid = False
+    c19_lostjob = False
+    c19_famlostjob = False
+    c19_bizlessmoney = False
+    c19_morecarecosts = False
+    c19_moremedicalcosts = False
+    c19_rentutilstrouble = False
+    c19_other = False
+    c19_notaffected = False
+    c19_otherexplain = ""
   
   referred_by_code = referral_med + referral_org + referral_legal_aid + referral_other
   referred_by_code = referred_by_code[:2]
@@ -437,7 +448,17 @@ code: |
       #"asset_type4": ,
       "dom_viol": "1" if dv_victim == True else "0",
       "veteran_household": "1" if veteran == True else "0",
-      "expense_rent": rent
+      "expense_rent": rent,
+      "c19_gotcovid": "1" if c19_gotcovid == True else "0", 
+      "c19_lostjob": "1" if c19_lostjob == True else "0", 
+      "c19_famlostjob": "1" if c19_famlostjob == True else "0", 
+      "c19_bizlessmoney": "1" if c19_bizlessmoney == True else "0",    
+      "c19_morecarecosts": "1" if c19_morecarecosts == True else "0", 
+      "c19_moremedicalcosts": "1" if c19_moremedicalcosts == True else "0", 
+      "c19_rentutilstrouble": "1" if c19_rentutilstrouble == True else "0", 
+      "c19_other": "1" if c19_other == True else "0", 
+      "c19_notaffected": "1" if c19_notaffected == True else "0", 
+      "c19_otherexplain": c19_otherexplain
       },
       "op": {
       "first_name": oppo_first_name,

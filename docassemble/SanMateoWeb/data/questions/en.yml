@@ -684,7 +684,7 @@ question: Housing Cases
 fields:
   - "Did you call Legal Aid SMC for help with a housing problem?": housing_case
     datatype: yesnoradio
-  - note: "For housing cases, we require either documentation of household income in the form of recent pay stubs, tax returns, benefit statements or bank statements, or we require that you self-certify income with a signature. Since you are submitting your information online, you can self-certify the information you provided regarding your income using a signature on the next screen."
+  - note: "We need proof of income for all adults in your household, such as pay stubs, tax returns, benefit or bank statements. Since you’re applying online, you can self-certify your income now by signing on the next screen. We’ll ask for documents later."
     show if:
       variable: housing_case
       is: True
@@ -755,6 +755,32 @@ subquestion: |
   I understand that Legal Aid Society of San Mateo County is a nonprofit law office, and is providing free legal service to me based on my eligibility as a low income resident of San Mateo County.
 fields: 
   - Type your full name: housing_limited_scope_ada  
+---
+section: Housing Cases
+question: |
+  How did COVID-19 affect you and your family? (Check all that are true)
+fields:
+  - 'I got COVID or had to care for someone who got COVID': c19_gotcovid
+    datatype: yesno
+  - 'I lost my job or had my work hours cut': c19_lostjob
+    datatype: yesno
+  - 'A family member who lives with me lost their job or had work hours cut': c19_famlostjob
+    datatype: yesno
+  - 'My business made less money': c19_bizlessmoney
+    datatype: yesno
+  - 'We had more childcare or family care needs or costs': c19_morecarecosts
+    datatype: yesno
+  - 'We had more medical costs': c19_moremedicalcosts
+    datatype: yesno
+  - 'We had trouble paying rent, mortgage, or utilities': c19_rentutilstrouble
+    datatype: yesno
+  - 'Other': c19_other
+    datatype: yesno
+  - 'If you selected other, please explain': c19_otherexplain
+    required: false
+  - 'My family was not affected by COVID-19': c19_notaffected
+    datatype: yesno
+continue button field: saw_c19_checkboxes
 ---
 section: Signature
 question: |

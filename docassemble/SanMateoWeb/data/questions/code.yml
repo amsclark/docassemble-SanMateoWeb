@@ -125,6 +125,7 @@ code: |
       housing_limited_scope_ada
       raw_retainer_ada = ada_retainer_doc.pdf.slurp(auto_decode=False)
       b64_retainer_ada_doc = base64.b64encode(raw_retainer_ada).decode('ascii')
+    saw_c19_checkboxes
   how_heard
   if ada_check is True:
     info_verify_sig
