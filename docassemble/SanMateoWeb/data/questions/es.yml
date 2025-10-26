@@ -698,7 +698,7 @@ question: Casos de vivienda
 fields:
   - "¿Llamó a Legal Aid SMC para obtener ayuda con un problema de vivienda?": housing_case
     datatype: yesnoradio
-  - note: "Necesitamos comprobantes de ingresos de todos los adultos en su hogar, como talonarios de pago, declaraciones de impuestos, comprobantes de beneficios o estados de cuenta bancarios. Como está solicitando en línea, puede certificar sus ingresos ahora firmando en la siguiente pantalla. Le pediremos los documentos más adelante."
+  - note: "Necesitamos comprobantes de ingresos de todos los adultos en su hogar, como talonarios de pago, declaraciones de impuestos, comprobantes de beneficios o estados de cuenta bancarios. Como está haciendo la aplicación en línea, puede certificar sus ingresos ahora firmando en la siguiente pantalla. Le pediremos los documentos más adelante."
     show if:
       variable: housing_case
       is: True
